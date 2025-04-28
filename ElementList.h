@@ -19,7 +19,7 @@ private:
     Element* _tail;
     Element* _currentNode;
     int _count;
-    bool _empty;
+    bool _isEmpty;
 };
 
 
