@@ -1,25 +1,43 @@
 #include "Element.h"
-///TODO - Investigate to see if this should be migrated to a differnt class
-void Element::addChild(Element* child)
+
+
+
+
+#include "Element.h"
+
+
+Element::Element(string name,
+                 unsigned short id,
+                 Element* parent)
 {
-    if(child != nullptr)
-    {
-        if(_childCount == 0)
-        {
-            _childHead = child;
-            _currentChild = _childHead;
-            _childCount++;
-        }
-        else //If children actually exist
-        {
-            _currentChild->_next = child;
-            _currentChild = _currentChild->_next;
-            _childCount++;
-        }
-    }
+        _name = name;
+        _id = id;
+        _parent = parent;
+        _hasChildren = false;
+        _childCount = 0;
+        _next = nullptr;
+        _previous = nullptr;
+        _childHead = nullptr;
 }
 
+Element::~Element()
+{
+    
+}
 
+Element::Element(const Element& other)
+{
+   
+    _name = other._name;
+    _id = other._id;
+    _parent = other._parent;
+    _hasChildren = other._hasChildren;
+    _parent = other._parent;
+    _next = other._next;
+    _childHead = other._childHead;
+    _previous = other._previous;
+   
+}
 
 
 #include <iostream>
