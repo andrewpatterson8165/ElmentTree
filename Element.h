@@ -1,12 +1,8 @@
-
 #ifndef ELEMENT_H_
 #define ELEMENT_H_
 
-
 #include <string>
 using std::string;
-
-
 
 class Element
 {
@@ -23,9 +19,10 @@ public:
         
     };
     ~Element(){};
+    
     Element(const Element& other){
         _name = other._name;
-        _id = other= _id;
+        _id = other._id;
         _parent = other._parent;
         _hasChildren = other._hasChildren;
         _parent = other._parent;
@@ -33,6 +30,7 @@ public:
         _childHead = other._childHead;
         _previous = other._previous;
     };
+    
     bool hasChildren(){return _hasChildren;}
     int _childCount;
     string _name;
