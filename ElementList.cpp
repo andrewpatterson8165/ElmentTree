@@ -1,5 +1,3 @@
-
- 
 #include "ElementList.h"
 #include <iostream>
 using std::cout;
@@ -30,8 +28,8 @@ ElementList::ElementList(const ElementList& other)
     _head = other._head;
     _tail = other._tail;
     _currentNode = other._currentNode;
-    int _count = other._count;
-    _empty = other._empty;
+    _count = other._count;
+    _isEmpty = other._isEmpty;
 }
 
 void ElementList::setHead(Element* head)
@@ -64,21 +62,33 @@ void ElementList::addElement(Element* element)
             _currentNode = element;
             _tail = element;
             _count++;
-            _empty = false;
+            _isEmpty = false;
         
         }
         else if(_currentNode->_parent == element->_parent)
         {
-            
+            cout << "Adding New node"  << endl;
             _currentNode->_next = element;
             element->_previous = _currentNode;
             _currentNode = _currentNode->_next;
             _tail = _currentNode;
-            
+            _count++;
         }
         else
         {
             cout << "Element Parent mismatch" << endl;
         }
     }
+}
+
+
+int ElementList::getCount()
+{
+    return _count;
+}
+
+
+bool ElementList::isEmpty()
+{
+    return _isEmpty;
 }
