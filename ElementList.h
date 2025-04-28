@@ -2,27 +2,25 @@
 #define ELEMENTLIST_H_
 
 #include "Element.h"
-
 class ElementList
 {
 public:
     ElementList();
     ~ElementList();
-    
-    void addElement(Element* elem);
-    void removeElement(unsigned short id);
-    void removeElement(string name);
-    bool find(unsigned short id);
-    bool find(unsigned int handle);
-    bool find(string name);
-    //void addChildList(ElementList* el);
-    
-
+    ElementList(const ElementList& other);
+    void setHead(Element* head);
+    Element* getTail();
+    Element* getCurrentNode();
+    void addElement(Element* element);
+    int getCount();
+    bool isEmpty();
+private:
     Element* _head;
-    Element* _current;
     Element* _tail;
-    int _nodeCount;
-    
+    Element* _currentNode;
+    int _count;
+    bool _empty;
 };
 
-#endif 
+
+#endif
