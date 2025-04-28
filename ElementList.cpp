@@ -1,3 +1,5 @@
+
+ 
 #include "ElementList.h"
 #include <iostream>
 using std::cout;
@@ -6,85 +8,77 @@ using std::endl;
 
 ElementList::ElementList()
 {
-    
+    cout << "ElementList constructor"  << endl;
     _head = nullptr;
-    _current = nullptr;
-    _tail  = nullptr;
-    _nodeCount = 0;
+    _tail = nullptr;
+    _currentNode = nullptr;
+    int _count = 0;
+    bool _empty = true;
 }
 
 ElementList::~ElementList()
 {
-   /* Element *trashNode = _head;
-    Element *traverseNode = _head;
+    cout << "ElementList Destructor"  << endl;
     
-    while(traverseNode != nullptr)
-    {
-        
-        trashNode = traverseNode;
-        if(traverseNode->_next != nullptr)
-        {
-            cout << "Traversing in constructor"  << endl;
-            traverseNode = traverseNode->_next;
-            
-        }
-        if(trashNode != nullptr)
-        {
-            cout << "Trashing a node.."  << endl;
-            delete trashNode;
-        }
-    }
-    */
+    //TODO: Deallocate memory to avoid leak and bad exit;
+    
 }
 
-void ElementList::addElement(Element* elem)
+
+ElementList::ElementList(const ElementList& other)
 {
-   
-    if(elem != nullptr)
+    _head = other._head;
+    _tail = other._tail;
+    _currentNode = other._currentNode;
+    int _count = other._count;
+    _empty = other._empty;
+}
+
+void ElementList::setHead(Element* head)
+{
+    if(head != nullptr)
     {
-        cout << "element is valid" << endl;
-        if((_head == nullptr) && 
-           (_nodeCount == 0))
+        _head = head;
+    }
+    else
+    {
+        cout << "ERROR - invalid head"  << endl;
+    }
+}
+
+
+
+/**
+  @param element - new element to be added to the list
+                   and must have a matching parent
+*/
+void ElementList::addElement(Element* element)
+{
+    cout << "adding new Element"  << endl;
+    if(element != nullptr)
+    {
+        if(_head == nullptr)
         {
-            _head = elem;
-            _current = elem;
-            _tail = _head;
+            cout << "Adding first node"  << endl;
+            _head = element;
+            _currentNode = element;
+            _tail = element;
+            _count++;
+            _empty = false;
+        
+        }
+        else if(_currentNode->_parent == element->_parent)
+        {
+            
+            _currentNode->_next = element;
+            element->_previous = _currentNode;
+            _currentNode = _currentNode->_next;
+            _tail = _currentNode;
+            
         }
         else
         {
-            _current->_next = elem;
-            _current->_next = nullptr;
+            cout << "Element Parent mismatch" << endl;
         }
-        _nodeCount++;
     }
-    cout << "Node Count = " << _nodeCount << endl;
 }
-
-void ElementList::removeElement(unsigned short id)
-{
-          
-}
-
-void ElementList::removeElement(string name)
-{
-           
-}
-
-
-bool ElementList::find(unsigned short id)
-{
-    return false;
-}
-bool ElementList::find(unsigned int handle)
-    
-{
-    return false;
-}
-
-bool ElementList::find(string name)
-{
-    return false;
-}
-
-
-
