@@ -28,6 +28,7 @@ public:
     Element* _previous;
     Element* _childHead;
     Element* _currentChild;
+    
 
 
     
