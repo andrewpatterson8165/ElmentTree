@@ -16,7 +16,6 @@ public:
     ~Element(){};
     Element(const Element& other){};
     bool hasChildren(){return _hasChildren;}
-    void addChild(Element* child);
     int _childCount;
     string _name;
     unsigned short _id;
@@ -27,11 +26,7 @@ public:
     Element* _next;
     Element* _previous;
     Element* _childHead;
-    Element* _currentChild;
-    
 
-
-    
-    
-    
 };
+
+#endif
