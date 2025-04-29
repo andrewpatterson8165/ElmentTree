@@ -1,3 +1,4 @@
+
 #include "ElementList.h"
 #include <iostream>
 using std::cout;
@@ -11,12 +12,13 @@ ElementList::ElementList()
     _tail = nullptr;
     _currentNode = nullptr;
     int _count = 0;
-    bool _empty = true;
+    bool _isEmpty = true;
 }
 
 ElementList::~ElementList()
 {
     cout << "ElementList Destructor"  << endl;
+    
     
     //TODO: Deallocate memory to avoid leak and bad exit;
     
@@ -34,6 +36,11 @@ ElementList::ElementList(const ElementList& other)
 
 void ElementList::setHead(Element* head)
 {
+    if(_isEmpty == false)
+    {
+        cout << "Set Head Error -List not empty" << endl;
+        return;
+    }
     if(head != nullptr)
     {
         _head = head;
@@ -42,6 +49,7 @@ void ElementList::setHead(Element* head)
     {
         cout << "ERROR - invalid head"  << endl;
     }
+    return;
 }
 
 
@@ -63,7 +71,6 @@ void ElementList::addElement(Element* element)
             _tail = element;
             _count++;
             _isEmpty = false;
-        
         }
         else if(_currentNode->_parent == element->_parent)
         {
@@ -91,4 +98,53 @@ int ElementList::getCount()
 bool ElementList::isEmpty()
 {
     return _isEmpty;
+}
+
+
+Element* ElementList::findReference(string name)
+{
+   Element* searchNode = nullptr;
+   
+   searchNode = _head;
+   for(searchNode = _head;searchNode != _tail;searchNode = searchNode->_next)
+   {
+       if(name == searchNode->_name)
+       {
+           return searchNode;
+       }
+    }
+    searchNode = nullptr;
+    return searchNode;
+}
+
+Element* ElementList::findReference(UINT16 resourceId)
+{
+    Element* searchNode = nullptr;
+   
+    searchNode = _head;
+    for(searchNode = _head;searchNode != _tail;searchNode = searchNode->_next)
+    {
+        if(resourceId == searchNode->_resourceId)
+        {
+           return searchNode;
+        }
+    }
+    searchNode = nullptr;
+    return searchNode;
+}
+
+Element* ElementList::findReference(HANDLE handle)
+{
+     Element* searchNode = nullptr;
+   
+    searchNode = _head;
+    for(searchNode = _head;searchNode != _tail;searchNode = searchNode->_next)
+    {
+        if(handle == searchNode->_handle)
+        {
+           return searchNode;
+        }
+    }
+    searchNode = nullptr;
+    return searchNode;
 }
