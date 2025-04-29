@@ -16,15 +16,17 @@ public:
     bool hasChildren(){return _hasChildren;}
     int _childCount;
     string _name;
-    unsigned short _id;
+    unsigned short _resourceId;
     unsigned int _handle;
-    bool _hasChildren;    
+
     
     Element* _parent;
     Element* _next;
     Element* _previous;
     Element* _childHead;
-
+private:
+    bool _hasChildren;
+    Element* _childListHead;
 };
 
 #endif
