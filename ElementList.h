@@ -15,6 +15,8 @@ public:
     int getCount();
     bool isEmpty();
 
+    ///WARNING: These methods are not safe 
+    ///         and should be used carefully.
     Element* findReference(string name);
     Element* findReference(UINT16 resourceId);
     Element* findReference(HANDLE handle);
