@@ -14,6 +14,10 @@ public:
     void addElement(Element* element);
     int getCount();
     bool isEmpty();
+
+    Element* findReference(string name);
+    Element* findReference(UINT16 resourceId);
+    Element* findReference(HANDLE handle);
 private:
     Element* _head;
     Element* _tail;
