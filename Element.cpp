@@ -1,19 +1,22 @@
-
 #include "Element.h"
-
+#include <iostream>
+using std::cerr;
+using std::cout;
+using std::endl;
 
 Element::Element(string name,
-                 unsigned short id,
+                 UINT16 resourceId,
                  Element* parent)
 {
-        _name = name;
-        _id = id;
-        _parent = parent;
-        _hasChildren = false;
-        _childCount = 0;
-        _next = nullptr;
-        _previous = nullptr;
-        _childHead = nullptr;
+    _name = name;
+    _resourceId = resourceId;
+    _parent = parent;
+    _hasChildren = false;
+    _childCount = 0;
+    _next = nullptr;
+    _previous = nullptr;
+    _childListHead = nullptr;
+    _handle = 0;
 }
 
 Element::~Element()
@@ -25,19 +28,19 @@ Element::Element(const Element& other)
 {
    
     _name = other._name;
-    _id = other._id;
+    _resourceId = other._resourceId;
     _parent = other._parent;
     _hasChildren = other._hasChildren;
     _parent = other._parent;
     _next = other._next;
-    _childHead = other._childHead;
+    _childListHead = other._childListHead;
     _previous = other._previous;
+    _handle =  other._handle;
    
 }
 
 
-
-void Element::setHasChildren(bool state)
+void Element::setChildrenFlag(bool state)
 {
     _hasChildren = state;
 }
@@ -60,11 +63,54 @@ void Element::setChildrenFirstElement(Element* element)
     }
 }
 
+
 Element* Element::getChildrenFirstElement()const
 {
     return _childListHead;
 }
 
 
+Element* Element::getParentElement()const
+{
+    return _parent;
+}
+
+/**
+    Warning: once the parent is set on an element, 
+             it cannot be modified. 
+*/
+void Element::setParentElement(Element* element)
+{
+    if(this->_parent != nullptr)
+    {
+        _parent = element;
+    }
+}
 
 
+string Element::getName()const
+{
+    return _name;
+}
+
+UINT16 Element::getResourceId()const
+{
+    return _resourceId;
+}
+
+HANDLE Element::getHandle()const
+{
+    return _handle;
+}
+
+
+bool Element::hasChildren()const
+{
+    return _hasChildren;
+}
+
+
+void Element::setHandle(HANDLE handle)
+{
+    _handle = handle;
+}
