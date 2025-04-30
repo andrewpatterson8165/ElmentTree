@@ -4,11 +4,12 @@
 #include <string>
 using std::string;
 
+#include "WinDef.h"
 
 class Element
 {
 public:
-    Element(string name,unsigned short id,Element* parent);
+    Element(string name,UINT16 id,Element* parent);
     ~Element();
     
     Element(const Element& other);
@@ -16,17 +17,24 @@ public:
     bool hasChildren(){return _hasChildren;}
     int _childCount;
     string _name;
-    unsigned short _resourceId;
-    unsigned int _handle;
-
+    UINT16 _resourceId;
+    HANDLE _handle;
+     
     
-    Element* _parent;
+    void setChildrenFirstElement(Element* element);
+    void setHasChildren(bool state);
+    
+    Element* getChildrenFirstElement()const;
+    Element* getParentElement()const; 
+    void setParentElement(Element* parent);
+    
     Element* _next;
     Element* _previous;
-    Element* _childHead;
+    
 private:
     bool _hasChildren;
     Element* _childListHead;
+    Element* _parent;
 };
 
 #endif
