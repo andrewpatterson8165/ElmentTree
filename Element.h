@@ -19,7 +19,7 @@ public:
     int _childCount;
     string _name;
     UINT16 _resourceId;
-    HANDLE _handle;
+    
     
      
     string getName()const;
@@ -45,6 +45,7 @@ private:
     bool _hasChildren;
     Element* _childListHead;
     Element* _parent;
+    HANDLE _handle;
 };
 
 #endif
