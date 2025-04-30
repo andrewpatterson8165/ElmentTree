@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 
-ElementList::ElementList()
+ElementList::ElementList(Element* parentElement)
 {
     cout << "ElementList constructor"  << endl;
     _head = nullptr;
@@ -13,6 +13,8 @@ ElementList::ElementList()
     _currentNode = nullptr;
     int _count = 0;
     bool _isEmpty = true;
+    _parentElement = parentElement;
+    
 }
 
 ElementList::~ElementList()
@@ -72,7 +74,7 @@ void ElementList::addElement(Element* element)
             _count++;
             _isEmpty = false;
         }
-        else if(_currentNode->_parent == element->_parent)
+        else if(_currentNode->getParentElement() == element->getParentElement())
         {
             cout << "Adding New node"  << endl;
             _currentNode->_next = element;
