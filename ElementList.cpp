@@ -1,4 +1,3 @@
-
 #include "ElementList.h"
 #include <iostream>
 using std::cout;
@@ -14,6 +13,16 @@ ElementList::ElementList(Element* parentElement)
     int _count = 0;
     bool _isEmpty = true;
     _parentElement = parentElement;
+    
+  //  cout << "Parent element -" << endl;
+  
+    if(_parentElement != nullptr)
+    {
+        cout << "name = " << _parentElement->getName() << endl;
+        cout << "resource = "  << _parentElement->getResourceId() << endl;
+        cout << "Handle = "  << _parentElement->getHandle() << endl;
+    }
+    
     
 }
 
@@ -34,6 +43,7 @@ ElementList::ElementList(const ElementList& other)
     _currentNode = other._currentNode;
     _count = other._count;
     _isEmpty = other._isEmpty;
+    _parentElement = other._parentElement;
 }
 
 void ElementList::setHead(Element* head)
@@ -67,7 +77,7 @@ void ElementList::addElement(Element* element)
     {
         if(_head == nullptr)
         {
-            cout << "Adding first node"  << endl;
+        
             _head = element;
             _currentNode = element;
             _tail = element;
@@ -76,7 +86,7 @@ void ElementList::addElement(Element* element)
         }
         else if(_currentNode->getParentElement() == element->getParentElement())
         {
-            cout << "Adding New node"  << endl;
+         
             _currentNode->_next = element;
             element->_previous = _currentNode;
             _currentNode = _currentNode->_next;
