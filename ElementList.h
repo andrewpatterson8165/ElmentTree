@@ -10,7 +10,12 @@ public:
     ElementList(Element* parentElement = nullptr);
     ~ElementList();
     ElementList(const ElementList& other);
-    
+
+    Element* operator++(){currentNode = currentNode->_next;};
+                          
+
+
+
     void setHead(Element* head);
     Element* getTail();
     Element* getCurrentNode();
@@ -23,6 +28,10 @@ public:
     Element* findReference(string name);
     Element* findReference(UINT16 resourceId);
     Element* findReference(HANDLE handle);
+    
+
+
+
 private:
     Element* _parentElement;
     Element* _head;
