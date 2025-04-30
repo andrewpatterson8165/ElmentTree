@@ -11,7 +11,13 @@ public:
     ~ElementList();
     ElementList(const ElementList& other);
 
-    Element* operator++(){currentNode = currentNode->_next;};
+    Element* operator++(){
+        _currentNode = _currentNode->_next;
+        return _currentNode;};
+    Element* operator--(){
+        _currentNode = _currentNode->_previous;
+        return _currentNode;};
+    }
                           
 
 
