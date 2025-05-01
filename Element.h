@@ -19,7 +19,9 @@ public:
     int _childCount;
     string _name;
     UINT16 _resourceId;
-       
+    
+    
+     
     string getName()const;
     UINT16 getResourceId()const;
     
@@ -33,11 +35,17 @@ public:
     Element* getChildrenFirstElement()const;
     Element* getParentElement()const; 
     void setParentElement(Element* parent);
-      
-    Element* _next;
-    Element* _previous;
+    
+    Element* getNextNode()const;
+    void setNextNode(Element* element);
+    
+    Element* getPreviousNode()const;
+    void setPreviousNode(Element* element);
+  
     
 private:
+    Element* _next;
+    Element* _previous;
     bool _hasChildren;
     Element* _childListHead;
     Element* _parent;
