@@ -87,9 +87,9 @@ void ElementList::addElement(Element* element)
         else if(_currentNode->getParentElement() == element->getParentElement())
         {
          
-            _currentNode->_next = element;
-            element->_previous = _currentNode;
-            _currentNode = _currentNode->_next;
+            _currentNode->setNextNode(element);
+            element->setPreviousNode(_currentNode);
+            _currentNode = _currentNode->getNextNode();
             _tail = _currentNode;
             _count++;
         }
@@ -118,7 +118,7 @@ Element* ElementList::findReference(string name)
    Element* searchNode = nullptr;
    
    searchNode = _head;
-   for(searchNode = _head;searchNode != _tail;searchNode = searchNode->_next)
+   for(searchNode = _head;searchNode != _tail;searchNode = searchNode->getNextNode())
    {
        if(name == searchNode->_name)
        {
@@ -134,7 +134,7 @@ Element* ElementList::findReference(UINT16 resourceId)
     Element* searchNode = nullptr;
    
     searchNode = _head;
-    for(searchNode = _head;searchNode != _tail;searchNode = searchNode->_next)
+    for(searchNode = _head;searchNode != _tail;searchNode = searchNode->getNextNode())
     {
         if(resourceId == searchNode->_resourceId)
         {
@@ -150,9 +150,9 @@ Element* ElementList::findReference(HANDLE handle)
      Element* searchNode = nullptr;
    
     searchNode = _head;
-    for(searchNode = _head;searchNode != _tail;searchNode = searchNode->_next)
+    for(searchNode = _head;searchNode != _tail;searchNode = searchNode->getNextNode())
     {
-        if(handle == searchNode->_handle)
+        if(handle == searchNode->getHandle())
         {
            return searchNode;
         }
@@ -160,3 +160,19 @@ Element* ElementList::findReference(HANDLE handle)
     searchNode = nullptr;
     return searchNode;
 }
+
+
+
+Element* ElementList::operator++()
+{
+    _currentNode = _currentNode->getNextNode();
+    return _currentNode;
+    
+}
+
+Element* ElementList::operator--()
+{
+    _currentNode = _currentNode->getPreviousNode();
+    return _currentNode;
+}
+                          
