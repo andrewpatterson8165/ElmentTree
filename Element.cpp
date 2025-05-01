@@ -40,9 +40,20 @@ Element::Element(const Element& other)
 }
 
 
+/**
+  Warning: if this flag is set to true and child nodes exist. 
+           the flag cannot be set back to false. 
+*/
 void Element::setChildrenFlag(bool state)
 {
-    _hasChildren = state;
+    if(this->_childListHead == nullptr)
+    {
+        _hasChildren = state;
+    }
+    else
+    {
+        cerr << "Cannot modify child state flag - children exist" << endl;
+    }
 }
 
 
@@ -113,4 +124,27 @@ bool Element::hasChildren()const
 void Element::setHandle(HANDLE handle)
 {
     _handle = handle;
+}
+
+
+
+Element* Element::getPreviousNode()const
+{
+    return _previous;
+}
+
+Element* Element::getNextNode()const
+{
+    return _next;
+}
+
+void Element::setNextNode(Element* element)
+{
+    _next = element;
+}
+
+
+void Element::setPreviousNode(Element* element)
+{
+    _previous = element;
 }
