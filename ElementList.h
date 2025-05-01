@@ -1,51 +1,45 @@
-#ifndef ELEMENT_H_
-#define ELEMENT_H_
+#ifndef ELEMENTLIST_H_
+#define ELEMENTLIST_H_
 
-#include <string>
-using std::string;
-
+#include "Element.h"
 #include "WinDef.h"
 
-class Element
+class ElementList
 {
 public:
-    Element(string name,UINT16 id,Element* parent);
-    ~Element();
-    
-    Element(const Element& other);
-    
-    bool hasChildren(){return _hasChildren;}
-    int _childCount;
-    string _name;
-    UINT16 _resourceId;
+    ElementList(Element* parentElement = nullptr);
+    ~ElementList();
+    ElementList(const ElementList& other);
 
-    string getName()const;
-    UINT16 getResourceId()const;
+    Element* operator++();
+    Element* operator--();
+
+
+
+    void setHead(Element* head);
+    Element* getTail();
+    Element* getCurrentNode();
+    void addElement(Element* element);
+    int getCount();
+    bool isEmpty();
+
+    ///WARNING: These methods are not safe 
+    ///         and should be used carefully.
+    Element* findReference(string name);
+    Element* findReference(UINT16 resourceId);
+    Element* findReference(HANDLE handle);
     
-    HANDLE getHandle()const;
-    void setHandle(HANDLE handle);
-    
-    void setChildrenFlag(bool state);
-    bool hasChildren()const;
-    
-    void setChildrenFirstElement(Element* element);
-    Element* getChildrenFirstElement()const;
-    Element* getParentElement()const; 
-    void setParentElement(Element* parent);
-    
-    Element* getNextNode()const;
-    void setNextNode(Element* element);
-    
-    Element* getPreviousNode()const;
-    void setPreviousNode(Element* element);
-  
+
+
+
 private:
-    Element* _next;
-    Element* _previous;
-    bool _hasChildren;
-    Element* _childListHead;
-    Element* _parent;
-    HANDLE _handle;
+    Element* _parentElement;
+    Element* _head;
+    Element* _tail;
+    Element* _currentNode;
+    int _count;
+    bool _isEmpty;
 };
+
 
 #endif
