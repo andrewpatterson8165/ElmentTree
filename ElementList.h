@@ -1,51 +1,51 @@
-#ifndef ELEMENTLIST_H_
-#define ELEMENTLIST_H_
+#ifndef ELEMENT_H_
+#define ELEMENT_H_
 
-#include "Element.h"
+#include <string>
+using std::string;
+
 #include "WinDef.h"
 
-class ElementList
+class Element
 {
 public:
-    ElementList(Element* parentElement = nullptr);
-    ~ElementList();
-    ElementList(const ElementList& other);
-
-    Element* operator++(){
-        _currentNode = _currentNode->_next;
-        return _currentNode;};
-    Element* operator--(){
-        _currentNode = _currentNode->_previous;
-        return _currentNode;};
-    }
-                          
-
-
-
-    void setHead(Element* head);
-    Element* getTail();
-    Element* getCurrentNode();
-    void addElement(Element* element);
-    int getCount();
-    bool isEmpty();
-
-    ///WARNING: These methods are not safe 
-    ///         and should be used carefully.
-    Element* findReference(string name);
-    Element* findReference(UINT16 resourceId);
-    Element* findReference(HANDLE handle);
+    Element(string name,UINT16 id,Element* parent);
+    ~Element();
     
+    Element(const Element& other);
+    
+    bool hasChildren(){return _hasChildren;}
+    int _childCount;
+    string _name;
+    UINT16 _resourceId;
 
-
-
+    string getName()const;
+    UINT16 getResourceId()const;
+    
+    HANDLE getHandle()const;
+    void setHandle(HANDLE handle);
+    
+    void setChildrenFlag(bool state);
+    bool hasChildren()const;
+    
+    void setChildrenFirstElement(Element* element);
+    Element* getChildrenFirstElement()const;
+    Element* getParentElement()const; 
+    void setParentElement(Element* parent);
+    
+    Element* getNextNode()const;
+    void setNextNode(Element* element);
+    
+    Element* getPreviousNode()const;
+    void setPreviousNode(Element* element);
+  
 private:
-    Element* _parentElement;
-    Element* _head;
-    Element* _tail;
-    Element* _currentNode;
-    int _count;
-    bool _isEmpty;
+    Element* _next;
+    Element* _previous;
+    bool _hasChildren;
+    Element* _childListHead;
+    Element* _parent;
+    HANDLE _handle;
 };
-
 
 #endif
