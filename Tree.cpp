@@ -1,96 +1,65 @@
 #include <iostream>
+#include <vector>
 
-template <typename T>
-class TreeNode {
+class Node {
 public:
-    T data;
-    TreeNode* left;
-    TreeNode* right;
+    int data;
+    std::vector<Node*> children;
 
-    TreeNode(T data) : data(data), left(nullptr), right(nullptr) {}
-    ~TreeNode() {
-        delete left;
-        delete right;
+    Node(int data) : data(data) {}
+
+    ~Node() {
+        for (Node* child : children) {
+            delete child;
+        }
+    }
+
+    void addChild(Node* child) {
+        children.push_back(child);
     }
 };
 
-template <typename T>
-class BinaryTree {
+class NTree {
 public:
-    TreeNode<T>* root;
+    Node* root;
 
-    BinaryTree() : root(nullptr) {}
-    ~BinaryTree() {
+    NTree(int rootData) {
+        root = new Node(rootData);
+    }
+
+    ~NTree() {
         delete root;
     }
 
-    void insert(T data) {
-        root = insertRecursive(root, data);
-    }
-
-    TreeNode<T>* search(T data) {
-        return searchRecursive(root, data);
-    }
-
-    void printInOrder() {
-        printInOrderRecursive(root);
-        std::cout << std::endl;
-    }
-
-private:
-    TreeNode<T>* insertRecursive(TreeNode<T>* node, T data) {
-        if (node == nullptr) {
-            return new TreeNode<T>(data);
-        }
-
-        if (data < node->data) {
-            node->left = insertRecursive(node->left, data);
-        } else {
-            node->right = insertRecursive(node->right, data);
-        }
-        return node;
-    }
-
-    TreeNode<T>* searchRecursive(TreeNode<T>* node, T data) {
-        if (node == nullptr || node->data == data) {
-            return node;
-        }
-
-        if (data < node->data) {
-            return searchRecursive(node->left, data);
-        } else {
-            return searchRecursive(node->right, data);
-        }
-    }
-    
-    void printInOrderRecursive(TreeNode<T>* node) {
-        if (node != nullptr) {
-            printInOrderRecursive(node->left);
-            std::cout << node->data << " ";
-            printInOrderRecursive(node->right);
+    // Example method to print the tree (pre-order traversal)
+    void printTree(Node* node) {
+        if (node == nullptr) return;
+        std::cout << node->data << " ";
+        for (Node* child : node->children) {
+            printTree(child);
         }
     }
 };
 
 int main() {
-    BinaryTree<int> tree;
-    tree.insert(50);
-    tree.insert(30);
-    tree.insert(20);
-    tree.insert(40);
-    tree.insert(70);
-    tree.insert(60);
-    tree.insert(80);
+    NTree tree(1);
+    Node* node2 = new Node(2);
+    Node* node3 = new Node(3);
+    Node* node4 = new Node(4);
+    Node* node5 = new Node(5);
+    Node* node6 = new Node(6);
+    Node* node7 = new Node(7);
 
-    std::cout << "Inorder traversal: ";
-    tree.printInOrder();
+    tree.root->addChild(node2);
+    tree.root->addChild(node3);
+    node2->addChild(node4);
+    node2->addChild(node5);
+    node3->addChild(node6);
+    node3->addChild(node7);
 
-    TreeNode<int>* node = tree.search(40);
-    if (node != nullptr) {
-        std::cout << "Found node: " << node->data << std::endl;
-    } else {
-        std::cout << "Node not found" << std::endl;
-    }
+    std::cout << "Tree (Pre-order traversal): ";
+    tree.printTree(tree.root);
+    std::cout << std::endl;
 
     return 0;
 }
