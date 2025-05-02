@@ -6,7 +6,7 @@ using std::endl;
 
 ElementList::ElementList(Element* parentElement)
 {
-    cout << "ElementList constructor"  << endl;
+    
     _head = nullptr;
     _tail = nullptr;
     _currentNode = nullptr;
@@ -28,8 +28,7 @@ ElementList::ElementList(Element* parentElement)
 
 ElementList::~ElementList()
 {
-    cout << "ElementList Destructor"  << endl;
-    
+
     
     //TODO: Deallocate memory to avoid leak and bad exit;
     
@@ -56,6 +55,7 @@ void ElementList::setHead(Element* head)
     if(head != nullptr)
     {
         _head = head;
+       
     }
     else
     {
@@ -174,5 +174,10 @@ Element* ElementList::operator--()
 {
     _currentNode = _currentNode->getPreviousNode();
     return _currentNode;
+}
+
+Element* ElementList::getHead()
+{
+    return _head;
 }
                           
