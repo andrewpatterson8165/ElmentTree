@@ -11,6 +11,7 @@ Element::Element(string name,
     _name = name;
     _resourceId = resourceId;
     _parent = parent;
+    
     _hasChildren = false;
     _childCount = 0;
     _next = nullptr;
@@ -40,8 +41,6 @@ Element::Element(const Element& other)
     _listPtr = other._listPtr;
    
 }
-
-
 /**
   Warning: if this flag is set to true and child nodes exist. 
            the flag cannot be set back to false. 
@@ -58,40 +57,6 @@ void Element::setChildrenFlag(bool state)
     }
 }
 
-
-/**
-    Warning: once the childList is set on a node, it cannot be destroyed. 
-*/
-void Element::setChildrenFirstElement(Element* element)
-{
-    if(_childListHead != nullptr)
-    {
-        cout << "Error - child head already set for this element" << endl;
-        
-    }
-    
-    if((element != nullptr) && (_hasChildren)){
-        _childListHead = element;
-        _childListHead->_previous = this;
-    }
-}
-
-
-Element* Element::getChildrenFirstElement()const
-{
-    return _childListHead;
-}
-
-
-Element* Element::getParentElement()const
-{
-    return _parent;
-}
-
-/**
-    Warning: once the parent is set on an element, 
-             it cannot be modified. 
-*/
 void Element::setParentElement(Element* element)
 {
     if(this->_parent != nullptr)
@@ -156,7 +121,27 @@ void Element::setListPtr(void* listPtr)
   _listPtr = listPtr;
 }
 
-void* Elemeht::getListPtr()
+void* Element::getListPtr()
 {
   return _listPtr;
+}
+
+
+Element* Element::getParentElement()const
+{
+    return _parent;
+}
+
+
+void Element::setChildListHead(Element* element)
+{
+    if(_childListHead == nullptr)
+    {
+        cout << "Child List head is set" << endl;
+        _childListHead = element;
+    }
+    else
+    {
+        cerr << "Cannot re-initialize a head to a list" << endl;
+    }
 }
