@@ -17,7 +17,8 @@ public:
 
 
     void setHead(Element* head);
-    Element* getTail();
+    Element* getHead()const;
+    Element* getTail()const;
     Element* getCurrentNode();
     void addElement(Element* element);
     int getCount();
