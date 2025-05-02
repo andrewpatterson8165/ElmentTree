@@ -41,7 +41,8 @@ public:
     
     Element* getPreviousNode()const;
     void setPreviousNode(Element* element);
-  
+    void setListPtr(void* listPtr){_listPtr = listPtr};
+    void* getListPtr(){return _listPtr;};
     
 private:
     Element* _next;
@@ -50,6 +51,7 @@ private:
     Element* _childListHead;
     Element* _parent;
     HANDLE _handle;
+    void* _listPtr;
 };
 
 #endif
