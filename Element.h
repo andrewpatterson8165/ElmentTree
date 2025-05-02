@@ -31,7 +31,7 @@ public:
     void setChildrenFlag(bool state);
     bool hasChildren()const;
     
-    void setChildrenFirstElement(Element* element);
+    void setChildListHead(Element* element);
     Element* getChildrenFirstElement()const;
     Element* getParentElement()const; 
     void setParentElement(Element* parent);
@@ -41,8 +41,8 @@ public:
     
     Element* getPreviousNode()const;
     void setPreviousNode(Element* element);
-    void setListPtr(void* listPtr){_listPtr = listPtr};
-    void* getListPtr(){return _listPtr;};
+    void setListPtr(void* listPtr);
+    void* getListPtr();
     
 private:
     Element* _next;
