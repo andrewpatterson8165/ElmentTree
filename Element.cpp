@@ -150,3 +150,13 @@ void Element::setPreviousNode(Element* element)
 {
     _previous = element;
 }
+
+void Element::setListPtr(void* listPtr)
+{
+  _listPtr = listPtr;
+}
+
+void* Elemeht::getListPtr()
+{
+  return _listPtr;
+}
