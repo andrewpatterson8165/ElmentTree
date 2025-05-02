@@ -17,6 +17,7 @@ Element::Element(string name,
     _previous = nullptr;
     _childListHead = nullptr;
     _handle = 0;
+    _listPtr = nullptr;
 }
 
 Element::~Element()
@@ -36,6 +37,7 @@ Element::Element(const Element& other)
     _childListHead = other._childListHead;
     _previous = other._previous;
     _handle =  other._handle;
+    _listPtr = other._listPtr;
    
 }
 
