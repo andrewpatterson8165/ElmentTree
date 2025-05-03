@@ -14,10 +14,9 @@ public:
     Element* operator++();
     Element* operator--();
 
-
-
     void setHead(Element* head);
     Element* getHead()const;
+    
     Element* getTail()const;
     Element* getCurrentNode();
     void addElement(Element* element);
@@ -30,9 +29,6 @@ public:
     Element* findReference(UINT16 resourceId);
     Element* findReference(HANDLE handle);
     
-
-
-
 private:
     Element* _parentElement;
     Element* _head;
@@ -42,5 +38,3 @@ private:
     bool _isEmpty;
 };
 
-
-#endif
