@@ -176,8 +176,7 @@ Element* ElementList::operator--()
     return _currentNode;
 }
 
-Element* ElementList::getHead()
+Element* ElementList::getHead()const
 {
     return _head;
 }
-                          
