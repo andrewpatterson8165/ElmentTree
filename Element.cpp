@@ -116,12 +116,12 @@ void Element::setPreviousNode(Element* element)
     _previous = element;
 }
 
-void Element::setListPtr(void* listPtr)
+void Element::setChildList(void* listPtr)
 {
   _listPtr = listPtr;
 }
 
-void* Element::getListPtr()
+void* Element::getChildList()
 {
   return _listPtr;
 }
