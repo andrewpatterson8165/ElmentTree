@@ -1,5 +1,8 @@
 #include "ElementTree.h"
-
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::cerr;
 
 ElementTree::ElementTree(Element* root)
 {
@@ -31,34 +34,53 @@ ElementTree::~ElementTree()
     
 }
 
-void ElementTree::addChildList()
+
+
+
+void ElementTree::addChildElement(Element *newElement,Element* parent)
 {
-    if(_nodeIterator != nullptr)
+    
+    //Find Parent before we add the child node in a child setChildList
+    if(parent != nullptr)
     {
-        _nodeIterator->setChildrenFlag(true);
-        ElementList* newList = new ElementList(_nodeIterator);
         
-        if(_listIterator == nullptr)
+        //Ensure that the parent node has a list added to it.
+        if(parent->getChildList() != nullptr)
         {
-            _rootList = newList;
-            _listIterator = _rootList;
-            _listIterator->_next = nullptr;
-            _listIterator->_previous = nullptr;
-            
+            //Get the reference to the list
+            ElementList* list = 
+                reinterpret_cast<ElementList*>(parent->getChildList());
+            //Check to see if the new element is valid
+            if(newElement != nullptr)
+            {
+                if(newElement->getParentElement() != parent)
+                {
+                    cerr << "Parent reference mismatch"  << endl;
+                }
+                else if(list != nullptr) //add a new element without error
+                {
+                    list->addElement(newElement);
+                    cout << "NEW TREE ELEMENT ADD TEST PASS"  << endl;
+                }
+            }
         }
         else
         {
-            
-        } 
+            parent->setChildrenFlag(true);
+            ElementList *newList = new ElementList(parent);
+            parent->setChildList(newList);
+            newList->addElement(newElement);
+        }
+    }
+    else
+    {
+        cerr << "ElementTree::addChildElement() - Bad parent ref" << endl;
     }
 }
+
 
 void ElementTree::printTree()
 {
     Element* nodeItr = _rootNode;
 }
 
-void ElementTree::printTree()
-{
-    
-}
