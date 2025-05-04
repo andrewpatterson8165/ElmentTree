@@ -2,27 +2,17 @@
 #include <iostream>
 using std::cout;
 using std::endl;
+using std::cerr;
 
 
 ElementList::ElementList(Element* parentElement)
 {
-    
     _head = nullptr;
     _tail = nullptr;
     _currentNode = nullptr;
     int _count = 0;
     bool _isEmpty = true;
     _parentElement = parentElement;
-    
-  //  cout << "Parent element -" << endl;
-  
-    if(_parentElement != nullptr)
-    {
-        cout << "name = " << _parentElement->getName() << endl;
-        cout << "resource = "  << _parentElement->getResourceId() << endl;
-        cout << "Handle = "  << _parentElement->getHandle() << endl;
-    }
-    
     
 }
 
@@ -72,12 +62,12 @@ void ElementList::setHead(Element* head)
 */
 void ElementList::addElement(Element* element)
 {
-    cout << "adding new Element"  << endl;
+    
     if(element != nullptr)
     {
         if(_head == nullptr)
         {
-        
+            cout <<"Adding a new Head" << endl;
             _head = element;
             _currentNode = element;
             _tail = element;
@@ -86,7 +76,7 @@ void ElementList::addElement(Element* element)
         }
         else if(_currentNode->getParentElement() == element->getParentElement())
         {
-         
+            cout << "Adding another node to list" << endl;
             _currentNode->setNextNode(element);
             element->setPreviousNode(_currentNode);
             _currentNode = _currentNode->getNextNode();
@@ -95,7 +85,7 @@ void ElementList::addElement(Element* element)
         }
         else
         {
-            cout << "Element Parent mismatch" << endl;
+            cerr << "Element Parent mismatch" << endl;
         }
     }
 }
