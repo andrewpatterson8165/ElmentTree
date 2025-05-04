@@ -15,10 +15,11 @@ public:
     
     Element(const Element& other);
     
-    bool hasChildren(){return _hasChildren;}
+    
     int _childCount;
     string _name;
     UINT16 _resourceId;
+    
     string getName()const;
     UINT16 getResourceId()const;
     
@@ -38,8 +39,9 @@ public:
     
     Element* getPreviousNode()const;
     void setPreviousNode(Element* element);
-    void setListPtr(void* listPtr);
-    void* getListPtr();
+    
+    void setChildList(void* listPtr);
+    void* getChildList();
     
 private:
     Element* _next;
