@@ -1,25 +1,32 @@
-#include "ElementTree.h"
+#ifndef ELEMENTTREE_H
+#define ELEMENTTREE_H
 #include <iostream>
 using std::cout;
 using std::endl;
 
-ElementTree::ElementTree(Element* root)
-{
-    if(root != nullptr)
-    {
-        _rootNode = root;
-        _rootNode->setChildrenFlag(true);
-        cout << "Top Node is set" << endl;
-    }
-}
+#include "Element.h"
+#include "ElementList.h"
 
-ElementTree::~ElementTree()
+class ElementTree
 {
+public:
+    ElementTree(Element* root);
+    ElementTree(const ElementTree& other);
+    ~ElementTree();
     
-}
+    void printTree();
+    void addChildList();
+    ElementList getCurrentList()const;
 
-ElementTree::ElementTree(const ElementTree& other)
-{
     
-}
+    
+public:
+    Element* _rootNode;
+    ElementList *_rootList;
+    
+    Element* _nodeIterator;
+    ElementList* _listIterator;
+    
+};
 
+#endif
