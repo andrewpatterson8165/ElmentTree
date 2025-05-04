@@ -17,8 +17,6 @@ ElementTree::ElementTree(Element* root)
     {
         _nodeIterator = nullptr;
     }
-    
-    _rootList = nullptr;
     _listIterator = nullptr;
     _levelCount = 0;
     _totalNodeCount = 0;
