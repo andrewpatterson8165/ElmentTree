@@ -19,9 +19,6 @@ public:
     int _childCount;
     string _name;
     UINT16 _resourceId;
-    
-    
-     
     string getName()const;
     UINT16 getResourceId()const;
     
