@@ -29,6 +29,10 @@ public:
     Element* findReference(UINT16 resourceId);
     Element* findReference(HANDLE handle);
     
+    //These are controled by the Tree Level
+    ElementList* _next;
+    ElementList* _previous;
+    
 private:
     Element* _parentElement;
     Element* _head;
@@ -38,3 +42,4 @@ private:
     bool _isEmpty;
 };
 
+#endif
