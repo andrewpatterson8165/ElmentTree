@@ -11,13 +11,9 @@ ElementTree::ElementTree(Element* root)
         _rootNode = root;
         _rootNode->setChildrenFlag(true);
         cout << "Top Node is set" << endl;
-        _nodeIterator = root;
+        
     }
-    else
-    {
-        _nodeIterator = nullptr;
-    }
-    _listIterator = nullptr;
+
     _levelCount = 0;
     _totalNodeCount = 0;
 }
@@ -68,7 +64,7 @@ void ElementTree::addChildElement(Element *newElement,Element* parent)
             parent->setChildList(newList);
             newList->addElement(newElement);
             _levelCount++;
-            cout << "Level Count = " << _levelCount << endl;
+           
             
         }
         _totalNodeCount++;
@@ -81,8 +77,48 @@ void ElementTree::addChildElement(Element *newElement,Element* parent)
 }
 
 
-void ElementTree::printTree()
+Element* ElementTree::find(string name,Element* itr)
 {
-    Element* nodeItr = _rootNode;
+    if(itr != nullptr)
+    {
+        if(itr->_name == name)
+        {
+            //return if a match is found
+            cout << "Match Found " << endl;
+            return itr;
+        }
+        if(itr->hasChildren())
+        {
+            
+             //Get the reference to the list
+            ElementList* list = 
+                reinterpret_cast<ElementList*>(itr->getChildList());
+            if(list != nullptr)
+            {
+                Element* fwd = list->findReference(name);
+                if(fwd != nullptr)
+                {
+                    cout << "found match in child list" << endl;
+                    return fwd;
+                }
+                else
+                {
+                    cout << "recursion call"  << endl;
+                    fwd = find(name,list->getHeadNode());
+                    
+                }
+            }
+        }
+        else if(itr->_next != nullptr)
+        {
+            itr = find(name,itr->next)
+            if(itr != nullptr)
+            {
+                return nullptr;
+            }
+        }
+    }
+    return nullptr;    
+        
+        
 }
-
