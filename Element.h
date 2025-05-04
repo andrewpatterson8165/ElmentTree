@@ -2,6 +2,8 @@
 #define ELEMENT_H_
 
 #include <string>
+#include <any>
+using std::any;
 using std::string;
 
 #include "WinDef.h"
@@ -40,8 +42,13 @@ public:
     Element* getPreviousNode()const;
     void setPreviousNode(Element* element);
     
+    //old interface (unsafe)
     void setChildList(void* listPtr);
     void* getChildList();
+    
+    //new interface (safe)
+    void setList(any& anyList);
+    any getList()const;
     
 private:
     Element* _next;
@@ -50,6 +57,7 @@ private:
     Element* _childListHead;
     Element* _parent;
     HANDLE _handle;
+    any _listPtr2;
     void* _listPtr;
 };
 
