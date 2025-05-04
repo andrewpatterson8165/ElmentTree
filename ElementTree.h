@@ -1,8 +1,6 @@
-#ifndef ELEMENTTREE_H
+##ifndef ELEMENTTREE_H
 #define ELEMENTTREE_H
-#include <iostream>
-using std::cout;
-using std::endl;
+
 
 #include "Element.h"
 #include "ElementList.h"
@@ -17,7 +15,9 @@ public:
     void printTree();
     void addChildList();
     ElementList getCurrentList()const;
-
+    void addChildElement(Element *newElement,Element* parent);
+    
+    
     
     
 public:
