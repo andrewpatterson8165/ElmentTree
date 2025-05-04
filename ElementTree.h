@@ -1,4 +1,4 @@
-##ifndef ELEMENTTREE_H
+#ifndef ELEMENTTREE_H
 #define ELEMENTTREE_H
 
 
@@ -21,11 +21,15 @@ public:
     
     
 public:
+
     Element* _rootNode;
     ElementList *_rootList;
     
-    Element* _nodeIterator;
-    ElementList* _listIterator;
+    Element* _nodeIterator;  //TBD iterator use
+    ElementList* _listIterator; //TBD interator use
+    
+    int _levelCount; 
+    int _totalNodeCount;
     
 };
 
