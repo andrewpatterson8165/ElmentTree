@@ -18,10 +18,7 @@ ElementList::ElementList(Element* parentElement)
 
 ElementList::~ElementList()
 {
-
-    
     //TODO: Deallocate memory to avoid leak and bad exit;
-    
 }
 
 
