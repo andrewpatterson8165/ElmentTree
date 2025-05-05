@@ -1,147 +1,120 @@
+
 #include "Element.h"
 #include <iostream>
 using std::cerr;
-using std::cout;
 using std::endl;
 
-Element::Element(string name,
-                 UINT16 resourceId,
-                 Element* parent)
+
+Element::Element(string name,UINT16 id,Element* parent)
 {
     _name = name;
-    _resourceId = resourceId;
+    _resourceId = id;
     _parent = parent;
-    
-    _hasChildren = false;
-    _childCount = 0;
-    _next = nullptr;
-    _previous = nullptr;
-    _childListHead = nullptr;
-    _handle = 0;
-    _listPtr = nullptr;
+    _childList.clear();
 }
+
 
 Element::~Element()
 {
-    
+    _childList.clear();
 }
 
 Element::Element(const Element& other)
 {
-   
     _name = other._name;
+    _handle = other._handle;
     _resourceId = other._resourceId;
-    _parent = other._parent;
-    _hasChildren = other._hasChildren;
-    _parent = other._parent;
-    _next = other._next;
-    _childListHead = other._childListHead;
-    _previous = other._previous;
-    _handle =  other._handle;
-    _listPtr = other._listPtr;
-   
+    _childList.clear();
+    for(auto it : other._childList)
+    {
+        _childList.push_back(it);
+    }
 }
-/**
-  Warning: if this flag is set to true and child nodes exist. 
-           the flag cannot be set back to false. 
-*/
-void Element::setChildrenFlag(bool state)
+    
+void Element::setName(string name)
 {
-    if(this->_childListHead == nullptr)
-    {
-        _hasChildren = state;
-    }
-    else
-    {
-        cerr << "Cannot modify child state flag - children exist" << endl;
-    }
+    _name = name;
 }
-
-void Element::setParentElement(Element* element)
-{
-    if(this->_parent != nullptr)
-    {
-        _parent = element;
-    }
-}
-
 
 string Element::getName()const
 {
     return _name;
 }
-
+    
 UINT16 Element::getResourceId()const
 {
     return _resourceId;
 }
 
+void Element::setResourceId(UINT16 resourceId)
+{
+    _resourceId = resourceId;
+}
+    
 HANDLE Element::getHandle()const
 {
     return _handle;
 }
 
-
-bool Element::hasChildren()const
-{
-    return _hasChildren;
-}
-
-
 void Element::setHandle(HANDLE handle)
 {
     _handle = handle;
 }
-
-
-
-Element* Element::getPreviousNode()const
+    
+list<Element*> Element::getChildList()const
 {
-    return _previous;
+    return _childList;
 }
 
-Element* Element::getNextNode()const
+void Element::addChild(Element* node)
 {
-    return _next;
+    _childList.push_back(node);
+}
+    
+void Element::setParent(Element* parent)
+{
+    _parent = parent;
 }
 
-void Element::setNextNode(Element* element)
-{
-    _next = element;
-}
-
-
-void Element::setPreviousNode(Element* element)
-{
-    _previous = element;
-}
-
-void Element::setChildList(void* listPtr)
-{
-  _listPtr = listPtr;
-}
-
-void* Element::getChildList()
-{
-  return _listPtr;
-}
-
-
-Element* Element::getParentElement()const
+Element* Element::getParent()const
 {
     return _parent;
 }
 
 
-void Element::setChildListHead(Element* element)
+
+Element* Element::findChildElement(string name)const
 {
-    if(_childListHead == nullptr)
+    Element* ref = nullptr;
+    for(auto it : _childList)
     {
-        cout << "Child List head is set" << endl;
-        _childListHead = element;
+        if(it->getName() == name)
+        {
+            ref = it;
+        }
     }
-    else
+    if(ref == nullptr)
     {
-        cerr << "Cannot re-initialize a head to a list" << endl;
+        cerr << "Element Not found "  << endl;
     }
+    return ref;
+}
+
+
+
+Element* Element::findChildElement(UINT16 id)const
+{
+    Element* ref = nullptr;
+    for(auto it : _childList)
+    {
+        if(it->getResourceId() == id)
+        {
+            ref = it;
+        }
+    }
+    if(ref == nullptr)
+    {
+        cerr << "Element Not found "  << endl;
+    }
+    return ref;
 }
