@@ -77,48 +77,36 @@ void ElementTree::addChildElement(Element *newElement,Element* parent)
 }
 
 
-Element* ElementTree::find(string name,Element* itr)
+Element* ElementTree::findElement(Element* itr, string name)
 {
-    if(itr != nullptr)
+    Element* elem = nullptr;
+    
+    if (itr == nullptr) 
     {
-        if(itr->_name == name)
-        {
-            //return if a match is found
-            cout << "Match Found " << endl;
-            return itr;
+        elem = itr;
+        return elem;
+    }
+    if (itr->getName() == name) 
+    {
+        cout << "Match Found"  << endl;
+        cout << "getName() return: " << itr->getName() << endl;
+        return itr;
+    }
+    
+    if (name < itr->getName()) 
+    {
+        if(itr->getChildRoot() != nullptr)
+        {   cout << "Searching Downward" << endl;
+            return findElement(itr->getChildRoot(), name);
         }
-        if(itr->hasChildren())
+    } 
+    else 
+    {
+        if(itr->getNextNode() != nullptr)
         {
-            
-             //Get the reference to the list
-            ElementList* list = 
-                reinterpret_cast<ElementList*>(itr->getChildList());
-            if(list != nullptr)
-            {
-                Element* fwd = list->findReference(name);
-                if(fwd != nullptr)
-                {
-                    cout << "found match in child list" << endl;
-                    return fwd;
-                }
-                else
-                {
-                    cout << "recursion call"  << endl;
-                    fwd = find(name,list->getHeadNode());
-                    
-                }
-            }
-        }
-        else if(itr->_next != nullptr)
-        {
-            itr = find(name,itr->next)
-            if(itr != nullptr)
-            {
-                return nullptr;
-            }
+            cout << "Searching Rightward" << endl;
+            return findElement(itr->getNextNode(), name);
         }
     }
-    return nullptr;    
-        
-        
+    return elem;    
 }
