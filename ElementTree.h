@@ -16,7 +16,8 @@ public:
     void addChildList();
     ElementList getCurrentList()const;
     void addChildElement(Element *newElement,Element* parent);
-    Element* findElement(string name);
+
+    Element* findElement(Element* itr, string name);
 
 public:
 
