@@ -80,9 +80,11 @@ void ElementTree::addChildElement(Element *newElement,Element* parent)
 Element* ElementTree::findElement(Element* itr, string name)
 {
     Element* elem = nullptr;
+    cout << "FIND ELEMENT CALL"  << endl;
     
     if (itr == nullptr) 
     {
+        cout <<  "empty pointer"  << endl;
         elem = itr;
         return elem;
     }
@@ -95,17 +97,38 @@ Element* ElementTree::findElement(Element* itr, string name)
     
     if (name < itr->getName()) 
     {
+        cout << "checking for downward search"  << endl;
+        if(itr->hasChildren())
+        {
+            cout << "children found"  <<endl;
+        }
         if(itr->getChildRoot() != nullptr)
-        {   cout << "Searching Downward" << endl;
-            return findElement(itr->getChildRoot(), name);
+        {   
+            cout << "recursive Search Downward" << endl;
+            elem =  findElement(itr->getChildRoot(), name);
+            if(elem != nullptr)
+            {
+                cout << "downward node found on child root"  << endl;
+                return elem;
+            }
+        }
+        else
+        {
+            cout << "No branch nodes"  << endl;
         }
     } 
     else 
     {
+        cout << "checking for rightward search"  << endl;
         if(itr->getNextNode() != nullptr)
         {
-            cout << "Searching Rightward" << endl;
-            return findElement(itr->getNextNode(), name);
+            cout << "Recursive Searching Rightward" << endl;
+            elem = findElement(itr->getNextNode(), name);
+            if(elem != nullptr)
+            {
+                cout << "Element found on rightward search"  << endl;
+                return elem;
+            }
         }
     }
     return elem;    
