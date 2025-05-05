@@ -1,65 +1,35 @@
 #include <iostream>
-#include <vector>
+#include <string>
 
-class Node {
-public:
-    int data;
-    std::vector<Node*> children;
-
-    Node(int data) : data(data) {}
-
-    ~Node() {
-        for (Node* child : children) {
-            delete child;
-        }
-    }
-
-    void addChild(Node* child) {
-        children.push_back(child);
-    }
+struct Node {
+    std::string data;
+    Node* left;
+    Node* right;
+    Node(std::string val) : data(val), left(nullptr), right(nullptr) {}
 };
 
-class NTree {
-public:
-    Node* root;
-
-    NTree(int rootData) {
-        root = new Node(rootData);
+bool search(Node* root, const std::string& target) {
+    if (root == nullptr) {
+        return false;
     }
-
-    ~NTree() {
-        delete root;
+    if (root->data == target) {
+        return true;
     }
-
-    // Example method to print the tree (pre-order traversal)
-    void printTree(Node* node) {
-        if (node == nullptr) return;
-        std::cout << node->data << " ";
-        for (Node* child : node->children) {
-            printTree(child);
-        }
+    if (target < root->data) {
+        return search(root->left, target);
+    } else {
+        return search(root->right, target);
     }
-};
+}
 
 int main() {
-    NTree tree(1);
-    Node* node2 = new Node(2);
-    Node* node3 = new Node(3);
-    Node* node4 = new Node(4);
-    Node* node5 = new Node(5);
-    Node* node6 = new Node(6);
-    Node* node7 = new Node(7);
+    Node* root = new Node("apple");
+    root->left = new Node("banana");
+    root->right = new Node("cherry");
+    root->left->left = new Node("grape");
 
-    tree.root->addChild(node2);
-    tree.root->addChild(node3);
-    node2->addChild(node4);
-    node2->addChild(node5);
-    node3->addChild(node6);
-    node3->addChild(node7);
-
-    std::cout << "Tree (Pre-order traversal): ";
-    tree.printTree(tree.root);
-    std::cout << std::endl;
+    std::cout << "Search for 'banana': " << search(root, "banana") << std::endl;
+    std::cout << "Search for 'orange': " << search(root, "orange") << std::endl;
 
     return 0;
 }
