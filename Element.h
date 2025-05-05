@@ -1,10 +1,12 @@
 #ifndef ELEMENT_H_
 #define ELEMENT_H_
 
+
+#include <list>
 #include <string>
-#include <any>
-using std::any;
 using std::string;
+using std::list;
+
 
 #include "WinDef.h"
 
@@ -14,51 +16,33 @@ class Element
 public:
     Element(string name,UINT16 id,Element* parent);
     ~Element();
-    
     Element(const Element& other);
     
-    
-    int _childCount;
-    string _name;
-    UINT16 _resourceId;
-    
+    void setName(string name);
     string getName()const;
+    
     UINT16 getResourceId()const;
+    void setResourceId(UINT16 resourceId);
     
     HANDLE getHandle()const;
     void setHandle(HANDLE handle);
     
-    void setChildrenFlag(bool state);
-    bool hasChildren()const;
+    list<Element*> getChildList()const;
+    void addChild(Element* node);
     
-    void setChildListHead(Element* element);
-    Element* getChildRoot()const {return _childListHead;};
-    Element* getParentElement()const; 
-    void setParentElement(Element* parent);
+    void setParent(Element* parent);
+    Element* getParent()const;
     
-    Element* getNextNode()const;
-    void setNextNode(Element* element);
+    Element* findChildElement(string name)const;
+    Element* findChildElement(UINT16 id)const;
     
-    Element* getPreviousNode()const;
-    void setPreviousNode(Element* element);
-    
-    //old interface (unsafe)
-    void setChildList(void* listPtr);
-    void* getChildList();
-    
-    //new interface (safe)
-    void setList(any& anyList);
-    any getList()const;
-    
-private:
-    Element* _next;
-    Element* _previous;
+protected:
+    list<Element*> _childList;
     bool _hasChildren;
-    Element* _childListHead;
-    Element* _parent;
+    
     HANDLE _handle;
-    any _listPtr2;
-    void* _listPtr;
+    UINT16 _resourceId;
+    string _name;
+    Element* _parent;
+  
 };
-
-#endif
