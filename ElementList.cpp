@@ -105,12 +105,13 @@ Element* ElementList::findReference(string name)
    Element* searchNode = nullptr;
    
    searchNode = _head;
-   for(searchNode = _head;searchNode != _tail;searchNode = searchNode->getNextNode())
-   {
+    while(searchNode->getNextNode() != nullptr)
+    {
        if(name == searchNode->_name)
        {
            return searchNode;
        }
+       searchNode = searchNode->getNextNode();
     }
     searchNode = nullptr;
     return searchNode;
@@ -121,12 +122,13 @@ Element* ElementList::findReference(UINT16 resourceId)
     Element* searchNode = nullptr;
    
     searchNode = _head;
-    for(searchNode = _head;searchNode != _tail;searchNode = searchNode->getNextNode())
+    while(searchNode->getNextNode() != nullptr)
     {
         if(resourceId == searchNode->_resourceId)
         {
            return searchNode;
         }
+        searchNode = searchNode->getNextNode();
     }
     searchNode = nullptr;
     return searchNode;
@@ -137,12 +139,13 @@ Element* ElementList::findReference(HANDLE handle)
      Element* searchNode = nullptr;
    
     searchNode = _head;
-    for(searchNode = _head;searchNode != _tail;searchNode = searchNode->getNextNode())
+    while(searchNode->getNextNode() != nullptr)
     {
         if(handle == searchNode->getHandle())
         {
            return searchNode;
         }
+        searchNode = searchNode->getNextNode();
     }
     searchNode = nullptr;
     return searchNode;
@@ -150,18 +153,6 @@ Element* ElementList::findReference(HANDLE handle)
 
 
 
-Element* ElementList::operator++()
-{
-    _currentNode = _currentNode->getNextNode();
-    return _currentNode;
-    
-}
-
-Element* ElementList::operator--()
-{
-    _currentNode = _currentNode->getPreviousNode();
-    return _currentNode;
-}
 
 Element* ElementList::getHead()const
 {
