@@ -32,7 +32,7 @@ public:
     bool hasChildren()const;
     
     void setChildListHead(Element* element);
-    Element* getChildrenFirstElement()const;
+    Element* getChildRoot()const {return _childListHead;};
     Element* getParentElement()const; 
     void setParentElement(Element* parent);
     
