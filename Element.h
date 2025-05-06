@@ -1,15 +1,11 @@
 #ifndef ELEMENT_H_
 #define ELEMENT_H_
 
-
 #include <list>
 #include <string>
 using std::string;
 using std::list;
-
-
 #include "WinDef.h"
-
 
 class Element
 {
@@ -45,7 +41,6 @@ protected:
     UINT16 _resourceId;
     string _name;
     Element* _parent;
-  
 };
 
 #endif
