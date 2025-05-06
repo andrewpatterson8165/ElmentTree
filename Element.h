@@ -35,7 +35,8 @@ public:
     
     Element* findChildElement(string name)const;
     Element* findChildElement(UINT16 id)const;
-    
+
+    bool hasChildren(){ return _childList.empty();};
 protected:
     list<Element*> _childList;
     bool _hasChildren;
