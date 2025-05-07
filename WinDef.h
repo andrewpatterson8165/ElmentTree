@@ -4,8 +4,6 @@
 typedef unsigned short UINT16;
 typedef unsigned int HANDLE;
 
-
-
 bool findInTree(Element* itr, string name)
 {
     bool flag = false;
@@ -25,14 +23,28 @@ bool findInTree(Element* itr, string name)
         }
         else
         {
-            Element* ref = itr->getChildList().front();
-            flag = findInTree(ref,name);
+           // Element* ref = itr->getChildList().front();
+            
+            for(auto it : itr->getChildList())
+            {
+                if(it->hasChildren())
+                {
+                   
+                    flag = findInTree(it,name);
+                    if(flag) 
+                    {
+                        return true;
+                    }
+                    
+                }
+            }
             if(flag)
             {
                 return true;
             }
+            
         }
     }
     return flag;
 }
-#endif
+
