@@ -1,29 +1,63 @@
+#include "Element.h"
 
-#include <iostream>
-#include "ElementList.h"
-using std::endl;
-using std::cout;
 
-int main()
+void testMain()
 {
-    ElementList list1;
-    Element mainWindow("Main Window",100,nullptr);
-    Element fileDialog("FileDialog",200,&mainWindow);
-    Element aboutDialog("AboutDialog,",210,&mainWindow);
-    
-    list1.addElement(&fileDialog);
-    
-    list1.addElement(&aboutDialog);
-    ElementList list2(list1);
-   
-    UINT16 resource = 200;
-    Element* searchElement = list2.findReference(resource);
-    if(searchElement == &fileDialog)
-    {
-        cout << "Match Found" << endl;
-        cout << "Name = "  << searchElement->_name << endl;
-        cout << "Reference Test Passed" << endl;
-    }
-
-    return 0;
+    Element mainWindow("mainWindow",001,nullptr);
+    Element fileDialog("fileDialog", 100,&mainWindow);
+    Element fileDialogSaveButton("fileDialogSaveButton", 200,&fileDialog);
+    Element fileDialogCancelButton("fileDialogCancelButton", 201,&fileDialog);
+    Element findReplaceDialog("findReplaceDialog",203,&mainWindow);
 }
+
+
+
+
+
+
+
+bool findInTree(Element* itr, string name)
+{
+    bool flag = false;
+    if(itr == nullptr)
+    {
+        return false;
+    }
+    if(itr->getName() == name)
+    {
+        return true;
+    }
+    else
+    {
+        if(itr->findChildElement(name))
+        {
+            return true;
+        }
+        else
+        {
+           // Element* ref = itr->getChildList().front();
+            
+            for(auto it : itr->getChildList())
+            {
+                if(it->hasChildren())
+                {
+                   
+                    flag = findInTree(it,name);
+                    if(flag) 
+                    {
+                        return true;
+                    }
+                    
+                }
+            }
+            if(flag)
+            {
+                return true;
+            }
+            
+        }
+    }
+    return flag;
+}
+
+
