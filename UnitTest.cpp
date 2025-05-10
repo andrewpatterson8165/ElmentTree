@@ -52,7 +52,7 @@ void UnitTest::initVars()
 
 
 
-bool findInTree(Element* itr, string name)
+bool UnitTest::findInTree(Element* itr, string name)
 {
     bool flag = false;
     if(itr == nullptr)
@@ -83,7 +83,6 @@ bool findInTree(Element* itr, string name)
                     {
                         return true;
                     }
-                    
                 }
             }
             if(flag)
@@ -95,5 +94,4 @@ bool findInTree(Element* itr, string name)
     }
     return flag;
 }
-
 
