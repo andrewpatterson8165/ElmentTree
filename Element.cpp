@@ -13,7 +13,7 @@ Element::Element(string name,UINT16 id,Element* parent)
     _childList.clear();
     if(_parent != nullptr)
     {
-        _parent->getChildList().push_back(this);
+       _parent->addChild(this);
     }
 }
 
