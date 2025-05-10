@@ -65,33 +65,32 @@ bool UnitTest::findInTree(Element* itr, string name)
     }
     else
     {
-        if(itr->findChildElement(name))
+        Element* ref = itr->findChildElement(name);
+        if(ref != nullptr)
         {
+            
             return true;
         }
         else
         {
-           // Element* ref = itr->getChildList().front();
-            
             for(auto it : itr->getChildList())
             {
                 if(it->hasChildren())
                 {
+                    cout << "child Name ="  << it->getName() << endl;
+                    cout << "Iterator Has Children Flag = true"  << endl;
                    
                     flag = findInTree(it,name);
-                    if(flag) 
+                    if(flag)
                     {
+                        cout << "Match Found"  << endl;
                         return true;
                     }
                 }
+               
             }
-            if(flag)
-            {
-                return true;
-            }
-            
         }
+    
     }
     return flag;
 }
-
