@@ -1,18 +1,54 @@
-#include "Element.h"
+#include "UnitTest.h"
+#include <iostream>
+using std::cout;
+using std::endl;
 
 
-void testMain()
+UnitTest::UnitTest()
 {
-    Element mainWindow("mainWindow",001,nullptr);
-    Element fileDialog("fileDialog", 100,&mainWindow);
-    Element fileDialogSaveButton("fileDialogSaveButton", 200,&fileDialog);
-    Element fileDialogCancelButton("fileDialogCancelButton", 201,&fileDialog);
-    Element findReplaceDialog("findReplaceDialog",203,&mainWindow);
+    cout << "Unit Test"  << endl;
+    
+}
+
+UnitTest::~UnitTest()
+{
+    
+}
+
+
+UnitTest::UnitTest(const UnitTest& other)
+{
+    
 }
 
 
 
 
+void UnitTest::initVars()
+{
+    _mainWindow = new Element("mainWindow", 0001,nullptr);
+    _fileDialog = new Element("fileDialog", 100, _mainWindow);
+    _fileDialogSaveButton = new Element("fileDialogSaveButton",200,_fileDialog);
+    
+    _fileDialogCancelButton = new Element("fileDialogCancelButton",201,_fileDialog);
+    _findReplaceDialog = new Element("findReplaceDialog", 101, _mainWindow);
+    _findReplaceDialogFindButton = new Element("findReplaceDialogFindButton",202,_findReplaceDialog);
+    _findReplaceDialogReplaceButton = new Element("findReplaceDialogReplaceButton",203,_findReplaceDialog);
+    _fontDialog = new Element("fontDialog",102,_mainWindow);
+    
+    _fontDialogOkButton = new Element("fontDialogOkButton", 204,_fontDialog);
+    _fontDialogColorButton = new Element("fontDialogColorButton",205,_fontDialog);
+    _fontDialogSizeButton = new Element("fontDialogSizeButton",206,_fontDialog);
+    _aboutDialog = new Element("AboutDialog", 103,_mainWindow);   
+ 
+    _aboutScrollButton = new Element("aboutScrollButton",207,_aboutDialog);
+    _aboutOkButton = new Element("aboutOkButton",208,_aboutDialog);
+    
+  
+    cout << "Main Window has " << _mainWindow->childCount() << endl;
+    cout << "File Dialog has "  << _fileDialog->childCount() << endl;
+    cout << "Find/Replace Dialog has " << _findReplaceDialog->childCount() << endl; 
+}
 
 
 
