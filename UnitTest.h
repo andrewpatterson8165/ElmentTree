@@ -16,6 +16,7 @@ public:
     void test2();
     void void3();
     bool findInTree(Element* itr, string name);
+    void printChildren(Element *itr,string name);
 private:
     Element* _mainWindow;
     Element* _fileDialog;
