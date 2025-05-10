@@ -33,6 +33,8 @@ public:
     Element* findChildElement(UINT16 id)const;
 
     bool hasChildren(){ return _childList.empty();};
+
+    int childCount()const{return _childList.size();};
 protected:
     list<Element*> _childList;
     bool _hasChildren;
