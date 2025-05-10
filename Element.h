@@ -32,7 +32,7 @@ public:
     Element* findChildElement(string name)const;
     Element* findChildElement(UINT16 id)const;
 
-    bool hasChildren(){ return _childList.empty();};
+    bool hasChildren(){return _hasChildren;};
 
     int childCount()const{return _childList.size();};
 protected:
