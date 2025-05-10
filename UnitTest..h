@@ -15,6 +15,7 @@ public:
     void test1();
     void test2();
     void void3();
+    bool findInTree(Element* itr, string name);
 private:
     Element* _mainWindow;
     Element* _fileDialog;
@@ -28,7 +29,7 @@ private:
     Element* _fontDialogColorButton;
     Element* _fontDialogSizeButton;
     Element* _aboutDialog;
-    Element* _aboutScrollButton
+    Element* _aboutScrollButton;
     Element* _aboutOkButton;
     
 };
