@@ -1,135 +1,48 @@
-#include "ElementTree.h"
-#include <iostream>
-using std::cout;
-using std::endl;
-using std::cerr;
 
 ElementTree::ElementTree(Element* root)
 {
-    if(root != nullptr)
+}
+
+ElementTree::
+
+
+bool ElementTree::findInTree(Element* itr, string name)
+{
+    bool flag = false;
+    if(itr == nullptr)
     {
-        _rootNode = root;
-        _rootNode->setChildrenFlag(true);
-        cout << "Top Node is set" << endl;
-        
+        return false;
     }
-
-    _levelCount = 0;
-    _totalNodeCount = 0;
-}
-
-
-ElementTree::ElementTree(const ElementTree& other)
-{
-    
-}
-
-
-ElementTree::~ElementTree()
-{
-    
-}
-
-
-
-
-void ElementTree::addChildElement(Element *newElement,Element* parent)
-{
-    //Find Parent before we add the child node in a child setChildList
-    if(parent != nullptr)
+    if(itr->getName() == name)
     {
-        //Ensure that the parent node has a list added to it.
-        if(parent->getChildList() != nullptr)
-        {
-            //Get the reference to the list
-            ElementList* list = 
-                reinterpret_cast<ElementList*>(parent->getChildList());
-            //Check to see if the new element is valid
-            if(newElement != nullptr)
-            {
-                if(newElement->getParentElement() != parent)
-                {
-                    cerr << "parent mismatch"  << endl;
-                }
-                else if(list != nullptr) //add a new element without error
-                {
-                    list->addElement(newElement);
-                }
-            }
-        }
-        else
-        {
-            parent->setChildrenFlag(true);
-            ElementList *newList = new ElementList(parent);
-            parent->setChildList(newList);
-            newList->addElement(newElement);
-            _levelCount++;
-           
-            
-        }
-        _totalNodeCount++;
-        cout << "Total Node Count = " << _totalNodeCount << endl;
+        return true;
     }
     else
     {
-        cerr << "ElementTree::addChildElement() - Bad parent ref" << endl;
-    }
-}
-
-
-Element* ElementTree::findElement(Element* itr, string name)
-{
-    Element* elem = nullptr;
-    cout << "FIND ELEMENT CALL"  << endl;
-    
-    if (itr == nullptr) 
-    {
-        cout <<  "empty pointer"  << endl;
-        elem = itr;
-        return elem;
-    }
-    if (itr->getName() == name) 
-    {
-        cout << "Match Found"  << endl;
-        cout << "getName() return: " << itr->getName() << endl;
-        return itr;
-    }
-    
-    if (name < itr->getName()) 
-    {
-        cout << "checking for downward search"  << endl;
-        if(itr->hasChildren())
+        Element* ref = itr->findChildElement(name);
+        if(ref != nullptr)
         {
-            cout << "children found"  <<endl;
-        }
-        if(itr->getChildRoot() != nullptr)
-        {   
-            cout << "recursive Search Downward" << endl;
-            elem =  findElement(itr->getChildRoot(), name);
-            if(elem != nullptr)
-            {
-                cout << "downward node found on child root"  << endl;
-                return elem;
-            }
+            
+            return true;
         }
         else
         {
-            cout << "No branch nodes"  << endl;
-        }
-    } 
-    else 
-    {
-        cout << "checking for rightward search"  << endl;
-        if(itr->getNextNode() != nullptr)
-        {
-            cout << "Recursive Searching Rightward" << endl;
-            elem = findElement(itr->getNextNode(), name);
-            if(elem != nullptr)
+            for(auto it : itr->getChildList())
             {
-                cout << "Element found on rightward search"  << endl;
-                return elem;
+               
+                if(it->hasChildren())
+                {
+                    flag = findInTree(it,name);
+                    
+                    if(flag)
+                    {
+                        return true;
+                    }
+                }
+               
             }
         }
+    
     }
-    return elem;    
+    return flag;
 }
