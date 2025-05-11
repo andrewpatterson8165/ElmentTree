@@ -89,3 +89,97 @@ bool ElementTree::findInTree(Element* itr, UINT16 resourceId)
     }
     return flag;
 }
+
+Element* UnitTest::getReference(Element* itr,string name)
+{
+    Element *ref = nullptr;
+    Element *recursiveRef = nullptr;
+    
+    bool flag = false;
+    
+    if(itr == nullptr)
+    {
+        return nullptr;
+    }
+    if(itr->getName() == name)
+    {
+        return ref;
+    }
+    else
+    {
+        ref = itr->findChildElement(name);
+        if(ref != nullptr)
+        {
+            return ref;
+        }
+        else
+        {
+            for(auto it : itr->getChildList())
+            {
+                if(it->hasChildren())
+                {
+                    cout << "child Name ="  << it->getName() << endl;
+                    cout << "Iterator Has Children Flag = true"  << endl;
+                   
+                    flag = getReference(it,name);
+                    if(flag)
+                    {
+                        cout << "Match Found"  << endl;
+                        return ref;
+                    }
+                }
+               
+            }
+        }
+    
+    }
+    return ref;
+}
+
+
+
+Element* UnitTest::getReference(Element* itr,UINT16 resourceId)
+{
+    Element *ref = nullptr;
+    Element *recursiveRef = nullptr;
+    
+    bool flag = false;
+    
+    if(itr == nullptr)
+    {
+        return nullptr;
+    }
+    if(itr->getResourceId() == resourceId)
+    {
+        return ref;
+    }
+    else
+    {
+        ref = itr->findChildElement(resourceId);
+        if(ref != nullptr)
+        {
+            return ref;
+        }
+        else
+        {
+            for(auto it : itr->getChildList())
+            {
+                if(it->hasChildren())
+                {
+                    cout << "child Name ="  << it->getName() << endl;
+                    cout << "Iterator Has Children Flag = true"  << endl;
+                   
+                    flag = getReference(it,resourceId);
+                    if(flag)
+                    {
+                        cout << "Match Found"  << endl;
+                        return ref;
+                    }
+                }
+               
+            }
+        }
+    
+    }
+    return ref;
+}
