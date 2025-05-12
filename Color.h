@@ -2,6 +2,8 @@
 #define COLOR_H_
 
 #include "WinDef.h"
+#include <string>
+using std::string;
 
 class Color
 {
@@ -12,8 +14,10 @@ public:
     Color(const Color& other);
     ~Color();
 
+    Color operator=(const Color& other);
+    operator COLORREF()const;
+    Color operator(COLORREF color);
     
-
     BYTE getRed();
     void setRed(BYTE red);
 
@@ -29,8 +33,7 @@ private:
     BYTE _blue;
     COLORREF _value;
 
-
-}
+};
 
 #endif
 
