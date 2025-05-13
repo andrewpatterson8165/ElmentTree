@@ -3,10 +3,9 @@
 
 Color::Color() 
 {
-   
-    _pack.bytes[2] = 0;
-    _pack.bytes[1] = 0;
-    _pack.bytes[0] = 0;
+    _pack.bytes[RED_INDEX] = 0;
+    _pack.bytes[GREEN_INDEX] = 0;
+    _pack.bytes[BLUE_INDEX] = 0;
     _pack.colorRef = 0;
 }
     
