@@ -1,37 +1,52 @@
-#ifndef COLOR_H_
-#define COLOR_H_
-
-#include "WinDef.h"
-#include <string>
-using std::string;
-
 class Color
 {
 public:
+
+    const UINT RED_INDEX = 2;
+    const UINT GREEN_INDEX = 1;
+    const UINT BLUE_INDEX = 0;
+
     Color();
-    Color(BYTE red,BTYE green,BYTE blue);
+    
+    Color(BYTE red, BYTE green, BYTE blue);
+   
     Color(COLORREF color);
+  
     Color(const Color& other);
+    
     ~Color();
 
     Color operator=(const Color& other);
-    operator COLORREF()const;
-    Color operator(COLORREF color);
     
-    BYTE getRed();
-    void setRed(BYTE red);
+    operator COLORREF()const;
+    
+    Color operator=(COLORREF color);
+    
+    UINT16 getRed()const;
+    void setRed(UINT16 red);
 
-    BYTE getGreen();
-    void setGreen(BYTE green);
+    UINT16 getGreen()const;
+    void setGreen(UINT16 green);
 
-    BYTE getYellow();
-    void setYellow(BYTE yellow);    
+    UINT16 getBlue()const;
+    void setBlue(UINT16 blue);    
+
+    COLORREF getColorRef()const;
+    void setColorRef(COLORREF ref);
+    
 
 private:
-    BYTE _red;
-    BYTE _green;
-    BYTE _blue;
-    COLORREF _value;
+
+    union ColorPackType
+    {
+        BYTE bytes[4];
+        COLORREF colorRef;
+    };
+    
+ 
+   
+    COLORREF _colorRef;
+    ColorPackType _pack;
 
 };
 
