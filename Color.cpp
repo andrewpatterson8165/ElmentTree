@@ -11,10 +11,9 @@ Color::Color()
     
 Color::Color(BYTE red,BYTE green,BYTE blue) 
 {
-    _pack.bytes[2] = red;
-    _pack.bytes[1] = green;
-    _pack.bytes[0] = blue;
-    
+    _pack.bytes[RED_INDEX] = red;
+    _pack.bytes[GREEN_INDEX] = green;
+    _pack.bytes[BLUE_INDEX] = blue;
 }
 
 
