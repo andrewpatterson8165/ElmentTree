@@ -3,24 +3,24 @@
 
 Color::Color() 
 {
-    _pack.bytes[RED_INDEX] = 0;
-    _pack.bytes[GREEN_INDEX] = 0;
-    _pack.bytes[BLUE_INDEX] = 0;
-    _pack.colorRef = 0;
+    _red = 0x0;
+    _green = 0x0;
+    _blue = 0X0;
 }
     
 Color::Color(BYTE red,BYTE green,BYTE blue) 
 {
-    _pack.bytes[RED_INDEX] = red;
-    _pack.bytes[GREEN_INDEX] = green;
-    _pack.bytes[BLUE_INDEX] = blue;
+   _red = red;
+   _green = green;
+   _blue = blue;
 }
 
 
 
 Color::Color(COLORREF color)
 {
-   this->_colorRef = color;
+   _colorRef = color;
+   extractBytes();
 }
     
 Color::Color(const Color& other)
@@ -35,7 +35,10 @@ Color::~Color()
 
 Color Color::operator=(const Color& other)
 {
-    _pack = other._pack;
+    _red = other._red;
+    _green = other._green;
+    _blue = other._blue;
+    
     return *this;
 }
 
@@ -53,32 +56,36 @@ Color Color::operator=(COLORREF color)
     
 UINT16 Color::getRed()const
 {
-    return _pack.bytes[RED_INDEX];
+    return _red; 
 }
     
 void Color::setRed(UINT16 red)
 {
-    _pack.bytes[RED_INDEX] = red;    
+    _red = red;  
+    
+    // Set the third byte to red
+    _colorRef = (_colorRef & 0xFF00FFFF) | _red;
 }
 
 UINT16 Color::getGreen()const
 {
-    return _pack.bytes[GREEN_INDEX]; 
+    return _green;
 }
 
 void Color::setGreen(UINT16 green)
 {
-    _pack.bytes[GREEN_INDEX] = green;
+    _green = green;
+    _colorRef = (_colorRef & 0xFFFF00FF) | _green;
 }
 
 UINT16 Color::getBlue()const
 {
-    return _pack.bytes[BLUE_INDEX];
+    return _blue;
 }
  
 void Color::setBlue(UINT16 blue)
 {
-    _pack.bytes[BLUE_INDEX] = blue;
+    _blue = blue;
 }
 
 
@@ -88,68 +95,29 @@ void Color::setBlue(UINT16 blue)
 
 COLORREF Color::getColorRef()const
 {
-    return _pack.colorRef;
+    return _colorRef;
 }
 
 void Color::setColorRef(COLORREF ref)
 {
-    _pack.colorRef = ref;
+    _colorRef = ref;
+    extractBytes();
 }
 
 
-void extractBytes(uint32_t dword, uint8_t bytes[4]) 
+void Color::extractBytes() 
 {
-    uint8_t* bytePtr = reinterpret_cast<uint8_t*>(&dword);
-    for (int i = 0; i < 4; ++i) 
-    {
-        bytes[i] = bytePtr[i];
-    }
+    _red = _colorRef >> 16 & 0XFF;
+    _green = _colorRef >> 8 & 0XFF;
+    _blue = _colorRef & 0XFF;
 }
 
 
-void extractBytes(uint32_t dword_value)
+
+
+
+
+void Color::printValues()
 {
-    
-    uint8_t byte0 = static_cast<uint8_t>(dword_value & 0xFF);        // Least significant byte (DD)
-    uint8_t byte1 = static_cast<uint8_t>((dword_value >> 8) & 0xFF);   // Second byte (CC)
-    uint8_t byte2 = static_cast<uint8_t>((dword_value >> 16) & 0xFF);  // Third byte (BB)
-    uint8_t byte3 = static_cast<uint8_t>((dword_value >> 24) & 0xFF);  // Most significant byte (AA)
 
 }
-
-
-
-int byteExtractTest() 
-{
-    uint32_t myDword = 0xAABBCCDD;
-    uint8_t byte0, byte1, byte2, byte3;
-    uint8_t byteArray[4];
-    
-    byteArray[0] = byte0;
-    byteArray[1] = byte1;
-    byteArray[2] = byte2;
-    byteArray[3] = byte3;
-    
-    extractBytes(myDword, byteArray);
-    byte0 = byteArray[0];
-    byte1 = byteArray[1];
-    byte2 = byteArray[2];
-    byte3 = byteArray[3];
-
-    cout << "Byte 0: 0x" << hex << static_cast<int>(byte0) << std::endl;
-    cout << "Byte 1: 0x" << hex << static_cast<int>(byte1) << std::endl;
-    cout << "Byte 2: 0x" << hex << static_cast<int>(byte2) << std::endl;
-    cout << "Byte 3: 0x" << hex << static_cast<int>(byte3) << std::endl;
-
-    extractBytes(myDword, byteArray);
-
-    cout << "Byte array: 0x" << std::hex 
-              << static_cast<int>(byteArray[0]) << " 0x"
-              << static_cast<int>(byteArray[1]) << " 0x"
-              << static_cast<int>(byteArray[2]) << " 0x"
-              << static_cast<int>(byteArray[3]) << std::endl;
-                 
-    return 0;
-}
-
-
