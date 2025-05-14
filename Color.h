@@ -1,3 +1,8 @@
+#ifndef COLOR_H_
+#define COLOR_H_
+#include "WinDef.h"
+
+
 class Color
 {
 public:
@@ -34,19 +39,17 @@ public:
     COLORREF getColorRef()const;
     void setColorRef(COLORREF ref);
     
+    void extractBytes();
+    void printValues();
 
 private:
 
-    union ColorPackType
-    {
-        BYTE bytes[4];
-        COLORREF colorRef;
-    };
+    BYTE _red;
+    BYTE _green;
+    BYTE _blue;
     
- 
-   
     COLORREF _colorRef;
-    ColorPackType _pack;
+
 
 };
 
