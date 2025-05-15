@@ -112,12 +112,19 @@ void Color::extractBytes()
     _blue = _colorRef & 0XFF;
 }
 
+// Function to set the nth bit (0-indexed) of an integer
+uint32_t setBit(uint32_t num, int n) 
+{
+    return num | (1 << n);
+}
 
-
-
+bool getBit(int number, int position) 
+{
+    return (number & (1 << position)) != 0;
+}
 
 
 void Color::printValues()
 {
-
+    
 }
