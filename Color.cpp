@@ -112,12 +112,8 @@ void Color::extractBytes()
     _blue = _colorRef & 0XFF;
 }
 
-void Color setBit(bool value, UINT16 position) 
+void Color::setBit(bool value, UINT16 position) 
 {
-    if(postion >= 24)
-    {
-        return;
-    }
    // Set a specific bit
     if (value) 
     {
