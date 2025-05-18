@@ -126,10 +126,17 @@ void Color::setBit(bool value, UINT16 position)
 }
 
 
-
-
-
-void Color::printValues()
+string Color::toBinary(ColorRef n) 
 {
+    string binary = std::bitset<32>(n).to_string();
     
+    size_t firstOne = binary.find('1');
+    if (firstOne != std::string::npos) 
+    {
+        return binary.substr(firstOne);
+    } 
+    else 
+    {
+        return "0";
+    }
 }
