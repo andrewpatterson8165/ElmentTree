@@ -42,6 +42,7 @@ public:
     void extractBytes();
     void printValues();
 
+    void setBit(bool value, UINT16 position);
 private:
 
     BYTE _red;
