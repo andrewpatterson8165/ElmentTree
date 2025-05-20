@@ -43,6 +43,7 @@ public:
     void printValues();
 
     void setBit(bool value, UINT16 position);
+    bool getBit(UINT16 indexPosition);
 private:
 
     BYTE _red;
