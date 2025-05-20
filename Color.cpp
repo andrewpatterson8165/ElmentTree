@@ -1,5 +1,7 @@
 #include "Color.h"
-
+#include <string>
+#include <bitset>
+using std::string;
 
 Color::Color() 
 {
@@ -125,6 +127,10 @@ void Color::setBit(bool value, UINT16 position)
     }
 }
 
+bool Color::getBit(UINT16 indexPosition) 
+{
+  return (_colorRef & (1 << indexPosition)) != 0;
+}
 
 string Color::toBinary(ColorRef n) 
 {
