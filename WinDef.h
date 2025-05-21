@@ -3,7 +3,7 @@
 #include <cstdint>
 
 typedef unsigned short UINT16;
-typedef unsigned int HANDLE;
+
 
 typedef uint8_t BYTE;
 typedef unsigned short WORD;
@@ -11,5 +11,21 @@ typedef unsigned long DWORD;
 typedef int64_t INT64; //Required for Windows 11
 typedef uint64_t UINT64; //Required for Windows 11
 typedef DWORD COLORREF;
+typedef void *PVOID;
+typedef PVOID HANDLE;
+typedef char CHAR;
+typedef CHAR* PSTR;
+
+typedef wchar_t WCHAR;
+typedef long* LONG_PTR;
+typedef LONG_PTR LPARAM;
+
+
+typedef HANDLE HINSTANCE;
+typedef HANDLE HWND;
+typedef uint32_t UINT; //default 32 bit type
+typedef UINT* WPARAM;
+typedef long LONG;
+
 
 #endif
