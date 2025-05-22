@@ -26,6 +26,8 @@ typedef HANDLE HWND;
 typedef uint32_t UINT; //default 32 bit type
 typedef UINT* WPARAM;
 typedef long LONG;
+typedef long* LONG_PTR;
+typedef LONG_PTR LRESULT;
 
 
 #endif
