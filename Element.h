@@ -45,4 +45,24 @@ protected:
     Element* _parent;
 };
 
+/**********************************************************************************************
+* windows_cast - for avoiding annoying warnings during compilation (64-bit compatibility)
+**********************************************************************************************/
+template< class Out, class In >
+inline Out windows_cast( In x )
+{
+    union //convert one type to another
+    {
+        In x;
+        Out y;
+    }convert;
+
+    convert.y = 0;
+    convert.x = x;
+    return convert.y;
+}
+
+#endif
+
+
 #endif
