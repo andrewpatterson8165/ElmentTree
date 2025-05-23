@@ -2,6 +2,9 @@
 #define WINDEF_H_
 #include <cstdint>
 
+
+#define CONST const
+
 typedef unsigned short UINT16;
 
 
@@ -15,6 +18,11 @@ typedef void *PVOID;
 typedef PVOID HANDLE;
 typedef char CHAR;
 typedef CHAR* PSTR;
+
+
+typedef wchar_t WCHAR;
+typedef CONST WCHAR *LPCWSTR;
+typedef LPCWSTR LPCTSTR;
 
 typedef wchar_t WCHAR;
 typedef long* LONG_PTR;
