@@ -1,6 +1,5 @@
-
 #ifndef WINDOWS_H_
-#define WINdOWS_H_
+#define WINDOWS_H_
 
 #include "WinDef.h"
 
@@ -15,8 +14,7 @@ struct POINT
   LONG x;
   LONG y;
 };
-          
-            
+                    
 struct MSG
 {
   HWND   hwnd;
@@ -27,7 +25,8 @@ struct MSG
   POINT  pt;
   DWORD  lPrivate;
 };
-            
+  
+typedef void* WNDPROC;
 
 typedef struct tagWNDCLASSEXA {
   UINT      cbSize;
@@ -43,7 +42,6 @@ typedef struct tagWNDCLASSEXA {
   LPCSTR    lpszClassName;
   HICON     hIconSm;
 } WNDCLASSEXA, *PWNDCLASSEXA, *NPWNDCLASSEXA, *LPWNDCLASSEXA;
-
 
 
 #endif
