@@ -71,5 +71,15 @@ typedef struct tagNMHDR { //winuser.h
   UINT_PTR idFrom;
   UINT     code;
 } NMHDR;
+
+typedef struct tagMEASUREITEMSTRUCT {
+  UINT      CtlType;
+  UINT      CtlID;
+  UINT      itemID;
+  UINT      itemWidth;
+  UINT      itemHeight;
+  ULONG_PTR itemData;
+} MEASUREITEMSTRUCT, *PMEASUREITEMSTRUCT, *LPMEASUREITEMSTRUCT;
+
 #endif
 
