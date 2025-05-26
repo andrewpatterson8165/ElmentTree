@@ -66,7 +66,7 @@ typedef struct tagCREATESTRUCTA {
   DWORD     dwExStyle;
 } CREATESTRUCTA, *LPCREATESTRUCTA;
 
-typedef struct tagNMHDR {
+typedef struct tagNMHDR { //winuser.h
   HWND     hwndFrom;
   UINT_PTR idFrom;
   UINT     code;
