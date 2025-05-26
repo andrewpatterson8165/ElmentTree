@@ -4,6 +4,7 @@
 
 #define CONST const
 
+typedef void *LPVOID;
 typedef unsigned short UINT16;
 
 typedef uint8_t BYTE;
