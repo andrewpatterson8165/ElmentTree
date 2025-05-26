@@ -18,6 +18,9 @@ typedef PVOID HANDLE;
 typedef HANDLE HICON;
 typedef HANDLE HBRUSH;
 typedef HANDLE HCURSOR;
+typedef HANDLE HMENU;
+
+
 
 
 typedef char CHAR;
@@ -37,6 +40,8 @@ typedef HANDLE HINSTANCE;
 typedef HANDLE HWND;
 typedef uint32_t UINT; //default 32 bit type
 typedef UINT* WPARAM;
+typedef UINT* UINT_PTR;
+typedef unsigned long* ULONG_PTR;
 typedef long LONG;
 typedef long* LONG_PTR;
 typedef LONG_PTR LRESULT;
