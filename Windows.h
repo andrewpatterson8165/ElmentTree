@@ -28,7 +28,8 @@ struct MSG
   
 typedef void* WNDPROC;
 
-typedef struct tagWNDCLASSEXA {
+typedef struct tagWNDCLASSEXA 
+{
   UINT      cbSize;
   UINT      style;
   WNDPROC   lpfnWndProc;
@@ -42,6 +43,13 @@ typedef struct tagWNDCLASSEXA {
   LPCSTR    lpszClassName;
   HICON     hIconSm;
 } WNDCLASSEXA, *PWNDCLASSEXA, *NPWNDCLASSEXA, *LPWNDCLASSEXA;
+
+
+typedef struct tagSIZE 
+{
+  LONG cx;
+  LONG cy;
+} SIZE, *PSIZE, *LPSIZE;
 
 
 #endif
