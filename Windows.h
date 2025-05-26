@@ -66,4 +66,10 @@ typedef struct tagCREATESTRUCTA {
   DWORD     dwExStyle;
 } CREATESTRUCTA, *LPCREATESTRUCTA;
 
+typedef struct tagNMHDR {
+  HWND     hwndFrom;
+  UINT_PTR idFrom;
+  UINT     code;
+} NMHDR;
 #endif
+
