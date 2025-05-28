@@ -36,6 +36,7 @@ public:
 
     int childCount()const{return _childList.size();};
 protected:
+    Element(){}; //to support child copy constructors. 
     list<Element*> _childList;
     bool _hasChildren;
     
